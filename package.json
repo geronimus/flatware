@@ -1,0 +1,46 @@
+{
+  "name": "flatware",
+  "version": "0.1.0",
+  "description": "A library to help you define configuration settings in JavaScript",
+  "main": "./src/flatware.js",
+  "scripts": {
+    "lint": "esw src",
+    "lint:watch": "npm run lint -- --watch",
+    "test": "mocha --require @babel/register --recursive",
+    "test:watch": "npm run test -- --watch",
+    "~test": "npm-run-all --parallel test:watch lint:watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/geronimus/flatware.git"
+  },
+  "keywords": [
+    "config",
+    "configuration",
+    "setting"
+  ],
+  "author": "geronimus (Graham Brown)",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/geronimus/flatware/issues"
+  },
+  "homepage": "https://github.com/geronimus/flatware#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.3.4",
+    "@babel/preset-env": "^7.3.4",
+    "@babel/register": "^7.0.0",
+    "babel-loader": "^8.0.5",
+    "chai": "^4.2.0",
+    "eslint": "^5.15.1",
+    "eslint-loader": "^2.1.2",
+    "eslint-watch": "^5.0.1",
+    "mocha": "^6.0.2",
+    "npm-run-all": "^4.1.5",
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.2.3"
+  },
+  "dependencies": {
+    "@geronimus/utils": "^0.1.12"
+  }
+}
