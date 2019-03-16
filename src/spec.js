@@ -15,20 +15,36 @@ function newSpec() {
 
   function getDef( settingName ) {
   
-    if ( typeof settingName !== "string" )
-      IllegalArgument( "settingName", "A string naming a previously-defined setting", settingName );
-    else if ( !listDefs().includes( settingName ) )
-      IllegalOperation(
-        `settings.defs.get( ${ settingName } )`,
-        `${ settingName } must be a defined setting`,
-        `${ settingName } is not an existing settings definition`
-      );
-    else
-      return defs[ settingName ];
+    validateSettingName( settingName );
+    validateSettingExists( settingName, "get" );
+
+    return defs[ settingName ];
   }
 
   function listDefs() {
     return Object.keys( defs ).sort();
+  }
+
+  function removeDef( settingName ) {
+
+    validateSettingName( settingName );
+    validateSettingExists( settingName, "remove" );
+
+    delete defs[ settingName ];
+  }
+
+  function validateSettingName( settingName ) {  
+    if ( typeof settingName !== "string" )
+      IllegalArgument( "settingName", "A string naming a previously-defined setting", settingName );
+  }
+
+  function validateSettingExists( settingName, method ) {  
+    if ( !listDefs().includes( settingName ) )
+      IllegalOperation(
+        `settings.defs.${ method }( ${ settingName } )`,
+        `${ settingName } must be a defined setting`,
+        `${ settingName } is not an existing setting definition`
+      );
   }
 
   return Object.freeze({
@@ -38,7 +54,8 @@ function newSpec() {
 
       defs: Object.freeze({
         get: getDef,
-        list: listDefs
+        list: listDefs,
+        remove: removeDef
       })
     })
   });
