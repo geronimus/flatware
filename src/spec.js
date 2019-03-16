@@ -1,4 +1,4 @@
-import setting from "./spec/setting.js";
+import settings from "./spec/settings.js";
 import { IllegalArgument, IllegalOperation } from "@geronimus/utils";
 
 function newSpec() {
@@ -7,7 +7,7 @@ function newSpec() {
 
   function defineSetting( name, type ) {
   
-    const newDef = setting.define( name, type );
+    const newDef = settings.define( name, type );
 
     defs[ newDef.name ] = newDef;
     return newDef;
