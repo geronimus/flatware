@@ -1,5 +1,5 @@
 import { assert } from "chai";
-import flatware from "../../src/flatware";
+import flatware from "../../../src/flatware";
 
 let conf;
 
