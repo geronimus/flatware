@@ -1,6 +1,6 @@
 import { IllegalArgument, isNull } from "@geronimus/utils";
 
-function define( name, type ) {
+function create( name, type ) {
 
   validateArgs( [ ...arguments ] );
 
@@ -30,6 +30,6 @@ function define( name, type ) {
 }
 
 export default Object.freeze({
-  define
+  create
 });
 
