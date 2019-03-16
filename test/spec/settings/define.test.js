@@ -63,14 +63,14 @@ describe( "settings", () => {
       const defOnce = spec.settings.define( "thing", "string" );
       const defTwice = spec.settings.define( "thing", "number" );
 
-      assert.notStrictEqual( spec.settings.defs.get( "thing" ), defOnce );
-      assert.strictEqual( spec.settings.defs.get( "thing" ), defTwice );
+      assert.notStrictEqual( spec.settings.get( "thing" ), defOnce );
+      assert.strictEqual( spec.settings.get( "thing" ), defTwice );
 
       const identicalRedef = spec.settings.define( "thing", "number" );
 
-      assert.deepEqual( spec.settings.defs.get( "thing" ), defTwice );
-      assert.notStrictEqual( spec.settings.defs.get( "thing" ), defTwice );
-      assert.strictEqual( spec.settings.defs.get( "thing" ), identicalRedef );
+      assert.deepEqual( spec.settings.get( "thing" ), defTwice );
+      assert.notStrictEqual( spec.settings.get( "thing" ), defTwice );
+      assert.strictEqual( spec.settings.get( "thing" ), identicalRedef );
     });
   });
 });

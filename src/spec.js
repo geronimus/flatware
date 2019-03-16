@@ -51,12 +51,9 @@ function newSpec() {
 
     settings: Object.freeze({
       define: defineSetting,
-
-      defs: Object.freeze({
-        get: getDef,
-        list: listDefs,
-        remove: removeDef
-      })
+      get: getDef,
+      list: listDefs,
+      remove: removeDef
     })
   });
 }
