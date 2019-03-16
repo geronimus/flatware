@@ -1,7 +1,7 @@
-import settingDef from "./setting/def.js";
+import settingDef from "./spec/setting/def.js";
 import { IllegalArgument, IllegalOperation } from "@geronimus/utils";
 
-function newConfig() {
+function newSpec() {
 
   const defs = {};
 
@@ -9,16 +9,8 @@ function newConfig() {
   
     const newDef = settingDef.create( name, type );
 
-    if ( Object.keys( defs ).includes( newDef.name ) )
-      IllegalOperation(
-        "settings.define( name, type )",
-        "The name of each setting must be unique",
-        `Added ${ newDef.name } when ${ newDef.name } is already defined`
-      );
-    else {
-      defs[ newDef.name ] = newDef;
-      return newDef;
-    }
+    defs[ newDef.name ] = newDef;
+    return newDef;
   }
 
   function getDef( settingName ) {
@@ -53,6 +45,6 @@ function newConfig() {
 }
 
 export {
-  newConfig
+  newSpec
 };
 

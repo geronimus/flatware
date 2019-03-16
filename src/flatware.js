@@ -1,6 +1,6 @@
-import { newConfig } from "./config/config";
+import { newSpec } from "./spec";
 
 export default Object.freeze({
-  newConfig
+  newSpec
 });
 

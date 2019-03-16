@@ -3,14 +3,14 @@ import flatware from "../src/flatware";
 
 describe( "flatware", () => {
 
-  describe( ".newConfig()", () => {
+  describe( ".newSpec()", () => {
     
-    it( "creates a config instance", () => {
+    it( "creates a spec instance", () => {
       
-      const conf = flatware.newConfig();
+      const spec = flatware.newSpec();
 
-      assert.isObject( conf );
-      assert.isFrozen( conf );
+      assert.isObject( spec );
+      assert.isFrozen( spec );
     });
   });
 });
