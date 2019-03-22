@@ -27,27 +27,30 @@ function create( name, type, sendToParent ) {
   validateType( type );
 
   let myName = name;
-  let constraints = initializeConstraints( allowedConstraints, type );
+  let myType = type;
+  let constraints = initializeConstraints( allowedConstraints, myType );
 
   const publicInterface = Object.freeze({
     get name() { return myName; },
+    get type() { return myType; },
     getConstraint,
     setConstraint,
-    rename
+    rename,
+    redefineType
   });
 
   return publicInterface;
 
   function getConstraint( constraint ) {
     
-    validateConstraintName( constraint, type );
-    return undefined;
+    validateConstraintName( constraint, myType );
+    return constraints[ constraint ];
   }
 
   function setConstraint( constraint, value ) {
     
-    validateConstraintName( constraint, type );
-    validateConstraintVal( constraint, value, type );
+    validateConstraintName( constraint, myType );
+    validateConstraintVal( constraint, value, myType );
 
     constraints[ constraint ] = value;
 
@@ -65,6 +68,14 @@ function create( name, type, sendToParent ) {
       })
     );
     myName = newName;
+    return publicInterface;
+  }
+
+  function redefineType( newType ) {
+  
+    validateType( newType );
+    myType = newType;
+    constraints = initializeConstraints( allowedConstraints, newType );
     return publicInterface;
   }
 
@@ -115,8 +126,8 @@ function create( name, type, sendToParent ) {
     if ( !( allowedConstraints[ type ].includes( constraint ) ) )
       IllegalArgument(
         "constraint",
-        `One of the allowed constraints for settings of type ${ type }:` +
-          `${ allowedConstraints[ type ].map( item => "- " + item ).join( "\n" ) }`,
+        `One of the allowed constraints for settings of type ${ type }:\n` +
+          `${ allowedConstraints[ type ].map( item => "  - " + item ).join( "\n" ) }`,
         constraint
       );
   }
