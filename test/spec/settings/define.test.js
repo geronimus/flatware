@@ -3,7 +3,7 @@ import flatware from "../../../src/flatware";
 
 let spec;
 
-describe( "settings", () => {
+describe( "spec.settings", () => {
 
   beforeEach( () => {
     spec = flatware.newSpec();
@@ -23,6 +23,14 @@ describe( "settings", () => {
       assert.throws( () => { spec.settings.define( true, "boolean" ) }, /^Illegal argument/ );
       assert.throws( () => { spec.settings.define( 1, "number" ) }, /^Illegal argument/ );
       assert.throws( () => { spec.settings.define( {}, "object" ) }, /^Illegal argument/ );
+      assert.doesNotThrow( () => { spec.settings.define( "valid name", "string" ); } );
+    });
+
+    it( "the name must have at least one character that is not whitespace", () => {
+    
+      [ "", " ", "   ", "\n", "\n\n\n", "\r\n", "name\nwith\r\nline breaks!" ].forEach( badName => {
+        assert.throws( () => { spec.settings.define( badName, "string" ); }, /^Illegal argument/ );
+      });
     });
 
     it( "the type must be a string", () => {
@@ -68,7 +76,6 @@ describe( "settings", () => {
 
       const identicalRedef = spec.settings.define( "thing", "number" );
 
-      assert.deepEqual( spec.settings.get( "thing" ), defTwice );
       assert.notStrictEqual( spec.settings.get( "thing" ), defTwice );
       assert.strictEqual( spec.settings.get( "thing" ), identicalRedef );
     });

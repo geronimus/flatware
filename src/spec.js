@@ -1,4 +1,4 @@
-import settings from "./spec/settings.js";
+import setting from "./spec/setting.js";
 import { IllegalArgument, IllegalOperation } from "@geronimus/utils";
 
 function newSpec() {
@@ -7,7 +7,7 @@ function newSpec() {
 
   function defineSetting( name, type ) {
   
-    const newDef = settings.define( name, type );
+    const newDef = setting.create( name, type, processMessage );
 
     defs[ newDef.name ] = newDef;
     return newDef;
@@ -15,9 +15,8 @@ function newSpec() {
 
   function getDef( settingName ) {
   
-    validateSettingName( settingName );
+    validateType( settingName, "string", "getDef" );
     validateSettingExists( settingName, "get" );
-
     return defs[ settingName ];
   }
 
@@ -27,15 +26,38 @@ function newSpec() {
 
   function removeDef( settingName ) {
 
-    validateSettingName( settingName );
+    validateType( settingName, "string", "removeDef" );
     validateSettingExists( settingName, "remove" );
-
     delete defs[ settingName ];
   }
 
-  function validateSettingName( settingName ) {  
-    if ( typeof settingName !== "string" )
-      IllegalArgument( "settingName", "A string naming a previously-defined setting", settingName );
+  function processMessage( message ) {
+  
+    if ( isRename( message ) ) {
+      const renamedDef = defs[ message.oldName ];
+      removeDef( message.oldName );
+      defs[ message.newName ] = renamedDef;
+    }
+
+    function isRename( message ) {
+      return typeof message === "object" &&
+        [ "event", "oldName", "newName"  ].every(
+          key => Object.keys( message ).includes( key ) &&
+            typeof message[ key ] === "string"
+        ) &&
+        message.event === "rename" &&
+        listDefs().includes( ( message.oldName ) );
+    }
+  }
+
+  function validateType( value, type, method ) {
+  
+    if ( typeof value !== type )
+      IllegalArgument(
+        `settings.defs.${ method }( ${ value } )`,
+        `A value of type "${ type }"`,
+        value
+      );
   }
 
   function validateSettingExists( settingName, method ) {  
