@@ -28,11 +28,17 @@ function create( name, type, sendToParent ) {
 
   let myName = name;
   let myType = type;
+  let myDesc = undefined;
   let constraints = initializeConstraints( allowedConstraints, myType );
 
   const publicInterface = Object.freeze({
     get name() { return myName; },
     get type() { return myType; },
+    get description() { return myDesc; },
+    set description( text ) {
+      validateDesc( text );
+      myDesc = text;
+    },
     getConstraint,
     setConstraint,
     rename,
@@ -108,6 +114,16 @@ function create( name, type, sendToParent ) {
         !allowedTypes.includes( type )
     )
       IllegalArgument( "type", `The data type must be one of: ${ allowedTypes }`, type );
+  }
+
+  function validateDesc( text ) {
+  
+    if ( text !== undefined && !isValidName( text ) )
+      IllegalArgument(
+        "description",
+        "A string consisting of at least one character, or undefined",
+        text
+      );
   }
   
   function initializeConstraints( allowedConstraints, type ) {
