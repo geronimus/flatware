@@ -1,9 +1,19 @@
-import setting from "./spec/setting.js";
-import { IllegalArgument, IllegalOperation } from "@geronimus/utils";
+import { allowedConstraints, allowedTypes, setting } from "./spec/setting.js";
+import { IllegalArgument, IllegalOperation, isNull } from "@geronimus/utils";
 
 function newSpec() {
 
   const defs = {};
+
+  return Object.freeze({
+    settings: Object.freeze({
+      define: defineSetting,
+      fromObject,
+      get: getDef,
+      list: listDefs,
+      remove: removeDef
+    })
+  });
 
   function defineSetting( name, type ) {
   
@@ -31,6 +41,34 @@ function newSpec() {
     delete defs[ settingName ];
   }
 
+  function fromObject( name, obj ) {
+    
+    validateObj( obj );
+
+    const result = defineSetting( name, obj.type );
+    result.desc = obj.desc;
+
+    allowedConstraints[ obj.type ].forEach( constraint => {
+      result.setConstraint( constraint, obj[ constraint ] ); 
+    });
+
+    return result;
+
+    function validateObj( obj ) {
+      if (
+        isNull( obj ) ||
+          typeof obj !== "object" ||
+          !Object.keys( obj ).includes( "type" ) ||
+          !allowedTypes.includes( obj.type )
+      )
+        IllegalArgument(
+          "obj",
+          "An object that includes the property \"type\"",
+          obj
+        );
+    }
+  }
+
   function processMessage( message ) {
   
     if ( isRename( message ) ) {
@@ -54,7 +92,7 @@ function newSpec() {
   
     if ( typeof value !== type )
       IllegalArgument(
-        `settings.defs.${ method }( ${ value } )`,
+        `settings.${ method }( ${ value } )`,
         `A value of type "${ type }"`,
         value
       );
@@ -68,16 +106,6 @@ function newSpec() {
         `${ settingName } is not an existing setting definition`
       );
   }
-
-  return Object.freeze({
-
-    settings: Object.freeze({
-      define: defineSetting,
-      get: getDef,
-      list: listDefs,
-      remove: removeDef
-    })
-  });
 }
 
 export {
