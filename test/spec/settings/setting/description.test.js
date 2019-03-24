@@ -6,7 +6,7 @@ let describedSetting;
 
 describe( "spec.settings.setting", () => {
 
-  describe( ".description", () => {
+  describe( ".desc", () => {
     
     beforeEach( () => {
       spec = flatware.newSpec();  
@@ -14,30 +14,30 @@ describe( "spec.settings.setting", () => {
     });
 
     it( "if you try to get it before it is set, it is undefined", () => {
-      assert.isUndefined( describedSetting.description );
+      assert.isUndefined( describedSetting.desc );
     });
 
     it( "you can't set it to a non-string value", () => {
       [ null, true, 1, {}, [ "there is a string in here" ] ].forEach( val => {
-        assert.throws( () => { describedSetting.description = val; }, /^Illegal argument/ );
+        assert.throws( () => { describedSetting.desc = val; }, /^Illegal argument/ );
       });
     });
 
     it( "...but you can set it to undefined (not a value)", () => {
-      assert.doesNotThrow( () => { describedSetting.description = undefined; } );  
-      describedSetting.description = undefined;
-      assert.isUndefined( describedSetting.description );
+      assert.doesNotThrow( () => { describedSetting.desc = undefined; } );  
+      describedSetting.desc = undefined;
+      assert.isUndefined( describedSetting.desc );
     });
 
     it( "you can set it to a string value, and get that value back", () => {
       let desc = "The maximum length for the raw JSON document length";
-      describedSetting.description = desc;
+      describedSetting.desc = desc;
 
-      assert.strictEqual( describedSetting.description, desc );
+      assert.strictEqual( describedSetting.desc, desc );
     });
 
     it( "you can't set it to the zero-length string", () => {
-      assert.throws( () => { describedSetting.description = ""; }, /^Illegal argument/ );
+      assert.throws( () => { describedSetting.desc = ""; }, /^Illegal argument/ );
     });
   });
 });

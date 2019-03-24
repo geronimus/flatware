@@ -34,15 +34,16 @@ function create( name, type, sendToParent ) {
   const publicInterface = Object.freeze({
     get name() { return myName; },
     get type() { return myType; },
-    get description() { return myDesc; },
-    set description( text ) {
+    get desc() { return myDesc; },
+    set desc( text ) {
       validateDesc( text );
       myDesc = text;
     },
     getConstraint,
     setConstraint,
     rename,
-    redefineType
+    redefineType,
+    asObject
   });
 
   return publicInterface;
@@ -83,6 +84,25 @@ function create( name, type, sendToParent ) {
     myType = newType;
     constraints = initializeConstraints( allowedConstraints, newType );
     return publicInterface;
+  }
+
+  function asObject() {
+    const result = appendValid( {}, "type", myType );
+    appendValid( result, "desc", myDesc );
+
+    Object.keys( constraints ).sort().forEach( item => {
+      appendValid( result, item, constraints[ item ] );
+    });
+
+    return result;
+
+    function appendValid( obj, key, val ) {
+      const result = obj || {};
+      if ( typeof key === "string" && !isNull( val ) )
+        result[ key ] = val;
+
+      return result;
+    }
   }
 
   function validateName( name ) {
