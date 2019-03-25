@@ -74,6 +74,38 @@ describe( "spec.settings", () => {
       const degenerateSetting = spec.settings.fromObject( "dimensions of thinking", degenerateInit );
       assert.deepEqual( degenerateSetting.asObject(), degenerateInit );
     });
+    
+    it( "constructs a well-formed setting when you give it an object with additional properties", () => {
+      const extraPropsSettingInit = {
+        type: "number",
+        desc: "can only be set to 1",
+        dusk: "19:21",
+        lowerBound: 1,
+        shippedFrom: "Kallenchuck Import-Export",
+        upperBound: 1,
+        contains: "Maroger's Rubens Medium",
+        optionsList: [ 1 ],
+        author: "Joseph Sheppard",
+        title: "How to Paint Like the Old Masters"
+      };
+      const extraPropsSetting = spec.settings.fromObject( "irrelaventSetting", extraPropsSettingInit );
+      assert.deepEqual(
+        extraPropsSetting.asObject(),
+        Object.keys( extraPropsSettingInit )
+          .filter(
+            key => [
+              "type", "desc", "lowerBound", "upperBound", "optionsList"
+            ].includes( key )
+          )
+          .reduce(
+            ( obj, key ) => {
+              obj[ key ] = extraPropsSettingInit[ key ];
+              return obj;
+            },
+            {}
+          )
+      );
+    });
   });
 });
 

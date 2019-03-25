@@ -6,6 +6,7 @@ function newSpec() {
   const defs = {};
 
   return Object.freeze({
+    asObject,
     settings: Object.freeze({
       define: defineSetting,
       fromObject,
@@ -14,6 +15,34 @@ function newSpec() {
       remove: removeDef
     })
   });
+
+  function asObject() {
+    return Object.keys( defs ).reduce( addValidSettingProps, {} );
+
+    function addValidSettingProps( obj, settingName ) {
+      const setting = defs[ settingName ];
+      const settingRep = { type: setting.type };
+
+      addDesc( setting, settingRep );
+      addConstraints( setting, settingRep );
+
+      obj[ settingName ] = settingRep;
+      return obj;
+
+      function addDesc( setting, rep ) {
+        if ( !isNull( setting.desc ) )
+          rep.desc = setting.desc;
+      }
+
+      function addConstraints( setting, rep ) {
+        allowedConstraints[ setting.type ]
+          .filter( constraint => !isNull( setting.getConstraint( constraint ) ) )
+          .forEach( constraint => {
+            rep[ constraint ] = setting.getConstraint( constraint );
+          });
+      }
+    }
+  }
 
   function defineSetting( name, type ) {
   
