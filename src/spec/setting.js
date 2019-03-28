@@ -115,17 +115,6 @@ function create( name, type, sendToParent ) {
       IllegalArgument( "name", "A string with at least one character, and no line breaks", name );
   }
 
-  function isValidName( name ) {
-    return typeof name === "string" &&
-      name.length > 0 &&
-      // Not exclusive composed of whitespace
-      !/^\s+$/.test( name ) &&
-      // Does not contain newlines
-      !/\n/.test( name ) &&
-      // Does not contain carriage returns
-      !/\r/.test( name );
-  }
-
   function validateType( type ) {
     
     if (
@@ -259,6 +248,17 @@ function create( name, type, sendToParent ) {
   }
 }
 
+function isValidName( name ) {
+  return typeof name === "string" &&
+    name.length > 0 &&
+    // Not exclusive composed of whitespace
+    !/^\s+$/.test( name ) &&
+    // Does not contain newlines
+    !/\n/.test( name ) &&
+    // Does not contain carriage returns
+    !/\r/.test( name );
+}
+
 const setting = Object.freeze({
   create  
 });
@@ -268,6 +268,7 @@ export default setting;
 export {
   allowedConstraints,
   allowedTypes,
+  isValidName,
   setting
 };
 
