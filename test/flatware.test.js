@@ -13,6 +13,17 @@ describe( "flatware", () => {
       assert.isFrozen( spec );
     });
   });
+
+  describe( ".newConf", () => {
+  
+    describe( "creates a conf instance", () => {
+      
+      const conf = flatware.newConf();
+
+      assert.isObject( conf );
+      assert.isFrozen( conf );
+    });
+  });
 });
 
 
