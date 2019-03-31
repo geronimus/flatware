@@ -1,5 +1,124 @@
-import { allowedConstraints, allowedTypes, setting } from "./spec/setting.js";
+import { allowedConstraints, allowedTypes, isValidName, setting } from "./spec/setting.js";
 import { IllegalArgument, IllegalOperation, isNull } from "@geronimus/utils";
+
+function specFromJSON( jsonObj ) {
+  
+  if ( typeof jsonObj !== "string" )
+    IllegalArgument( "jsonObj", "A string", jsonObj );
+  
+  let obj;
+
+  try { obj = rehydrateDates( JSON.parse( jsonObj ) ); }
+  catch( error ) {
+    IllegalArgument(
+      "jsonObj",
+      "A parseable JSON string",
+      `${ jsonObj } which throws ${ error.message }`
+    );
+  }
+
+  return specFromObject( obj );
+
+  function rehydrateDates( obj ) {
+    
+    Object.keys( obj ).forEach( setting => {
+      if ( obj[ setting ][ "type" ] === "Date" )
+        Object.keys( obj[ setting ] )
+          .filter( item => [ "upperBound", "lowerBound", "optionsList" ].includes( item ) )
+          .forEach( item => {
+            if ( item === "optionsList" && Array.isArray( obj[ setting ][ item ] ) )
+              obj[ setting ][ item ] = obj[ setting ][ item ].map( isoString => getDateVal( isoString ) );
+            else
+              obj[ setting ][ item ] = getDateVal( obj[ setting ][ item ] );
+          });
+    });
+
+    return obj;
+
+    function getDateVal( isoString ) {
+      const isoDatePattern = /\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z/;
+
+      if (
+        typeof isoString === "string" &&
+          isoDatePattern.test( isoString )
+      )
+        return new Date( isoString );
+      else
+        return isoString;
+    }
+  }
+}
+
+function specFromObject( obj ) {
+
+  validateObj( obj );
+
+  Object.keys( obj ).forEach( name => {
+    validateSettingProps( name, obj[ name ] );
+  });
+
+  const spec = newSpec();
+
+  Object.keys( obj ).forEach( name => {
+    const setting = spec.settings.define( name, obj[ name ].type );
+    setting.desc = obj[ name ].desc;
+    
+    Object.keys( obj[ name ] )
+      .filter( prop => ![ "type", "desc" ].includes( prop ) )
+      .forEach( constraint => {
+        setting.setConstraint( constraint, obj[ name ][ constraint ] );  
+      });
+  });
+
+  return spec;
+
+  function validateObj( obj ) {
+    if ( isNull( obj ) || Array.isArray( obj ) || typeof obj !== "object" )
+      IllegalArgument( "obj", "An object defining a spec", obj );
+  }
+
+  function validateSettingProps( name, defObj ) {
+
+    validateName( name );
+    validateAllowedType( name, defObj );
+    validateTypeConstraints( name, defObj );
+
+    function validateName( name ) {
+      if ( !isValidName( name ) )
+        IllegalArgument(
+          "setting name",
+          "A string with at least one non-space character and no new lines",
+          defObj
+        );
+    }
+
+    function validateAllowedType( name, defObj ) {
+      if (
+        !Object.keys( defObj ).includes( "type" ) ||
+          !allowedTypes.includes( defObj[ "type" ] )
+      )
+        IllegalArgument(
+          name,
+          `One of: \n- ${ allowedTypes.join( "\n- " ) }`,
+          defObj[ "type" ]
+        );
+    }
+
+    function validateTypeConstraints( name, defObj ) {
+      Object.keys( defObj )
+        .filter( key => [ "type", "desc" ].includes[ key ] )
+        .forEach( key => {
+          if ( !allowedConstraints[ defObj[ "type" ] ].includes( key ) )
+            IllegalArgument(
+              name,
+              "An object defining only the constraints:\n- " +
+                `${ allowedConstraints[ defObj[ "type" ] ].join( "\n- " ) }`,
+              key
+            );
+        });
+    }
+  }
+}
 
 function newSpec() {
 
@@ -138,6 +257,8 @@ function newSpec() {
 }
 
 export {
-  newSpec
+  newSpec,
+  specFromJSON,
+  specFromObject
 };
 
