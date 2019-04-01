@@ -43,6 +43,15 @@ describe( "conf.values", () => {
         assert.doesNotThrow( () => { conf.values.set( "good value", goodValue ); } );
       });
     });
+
+    it( "setting a value to undefined is the same thing as removing it", () => {
+    
+      conf.values.set( "vanishingValue", true );
+      assert.deepEqual( conf.values.list(), { vanishingValue: true } );
+
+      conf.values.set( "vanishingValue", undefined );
+      assert.deepEqual( conf.values.list(), {} );
+    });
   });
 });
 

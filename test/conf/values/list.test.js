@@ -1,5 +1,6 @@
 import { assert } from "chai";
 import flatware from "../../../src/flatware";
+import { exampleConfObj } from "../fromObject.test";
 
 let conf;
 
@@ -15,12 +16,7 @@ describe( "conf.values", () => {
 
     it( "returns a sorted list of values you have previously set", () => {
     
-      const vals = {
-        storageAdaptor: "rdbmsStorage",
-        hasServer: true,
-        serverNodes: 6,
-        beginningOfTime: new Date( "1970-01-01T00:00:00.0Z" )
-      };
+      const vals = exampleConfObj;
       const sortedKeys = Object.keys( vals ).sort();
 
       Object.keys( vals )
