@@ -53,7 +53,6 @@ describe( "specFromJSON( jsonObj )", () => {
             );
           });
       });
-
   });
 });
 
