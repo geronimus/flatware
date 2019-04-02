@@ -1,25 +1,8 @@
+import { constraintsByType, types } from "./setting/structure";
 import { IllegalArgument, IllegalOperation, isNull } from "@geronimus/utils";
 
-const allowedConstraints = Object.freeze({
-  "boolean": [
-  ],
-  "number": [
-    "lowerBound",
-    "optionsList",
-    "upperBound"
-  ],
-  "string": [
-    "optionsList",
-    "pattern"
-  ],
-  "Date": [
-    "lowerBound",
-    "optionsList",
-    "upperBound"
-  ]
-});
-
-const allowedTypes = Object.freeze( Object.keys( allowedConstraints ) );
+const allowedConstraints = constraintsByType;
+const allowedTypes = types;
 
 function create( name, type, sendToParent ) {
 

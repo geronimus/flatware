@@ -20,8 +20,8 @@ const specObjExample  = {
   },
   dateMax: {
     type: "Date",
-    //desc: "The date value used to represent an as-yet-unknown date in the future",
-    optionsList: [ new Date( 2147483647000 ), new Date( "9999-12-31T23:59:59.999" ) ]
+    desc: "The date value used to represent an as-yet-unknown date in the future",
+    optionsList: [ new Date( 2147483647000 ), new Date( "9999-12-31T23:59:59.999Z" ) ]
   }
 }
 
