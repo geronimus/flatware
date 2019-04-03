@@ -1,4 +1,4 @@
-import { constraintsByType, types } from "./setting/structure";
+import { constraintsByType, types } from "./structure";
 import { IllegalArgument, IllegalOperation, isNull } from "@geronimus/utils";
 
 const allowedConstraints = constraintsByType;

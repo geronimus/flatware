@@ -1,5 +1,5 @@
 import { copyValue } from "../value";
-import { propertiesByType, constraintsByType } from "./setting/structure";
+import { propertiesByType, constraintsByType } from "./structure";
 
 function objectify( defs ) {
 

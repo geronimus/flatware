@@ -4,7 +4,7 @@ import { setting } from "./setting.js";
 import {
   types as allowedTypes,
   constraintsByType as allowedConstraints
-} from "./setting/structure";
+} from "./structure";
 
 function newSpec() {
 
