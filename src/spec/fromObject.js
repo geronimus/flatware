@@ -16,16 +16,9 @@ function specFromObject( obj ) {
 
   const spec = newSpec();
 
-  Object.keys( obj ).forEach( name => {
-    const setting = spec.settings.define( name, obj[ name ].type );
-    setting.desc = obj[ name ].desc;
-    
-    Object.keys( obj[ name ] )
-      .filter( prop => ![ "type", "desc" ].includes( prop ) )
-      .forEach( constraint => {
-        setting.setConstraint( constraint, obj[ name ][ constraint ] );  
-      });
-  });
+  Object.keys( obj ).forEach(
+    name => buildSetting( name, obj[ name ], spec )
+  );
 
   return spec;
 
@@ -74,6 +67,18 @@ function specFromObject( obj ) {
             );
         });
     }
+  }
+
+  function buildSetting( name, defObj, spec ) {
+  
+    const setting = spec.settings.define( name, defObj.type );
+    setting.desc = defObj.desc;
+    
+    Object.keys( defObj )
+      .filter( prop => allowedConstraints[ setting.type ].includes( prop ) )
+      .forEach( constraint => {
+        setting.setConstraint( constraint, defObj[ constraint ] );  
+      });
   }
 }
 
