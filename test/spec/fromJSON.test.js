@@ -2,12 +2,12 @@ import { assert } from "chai";
 import flatware from "../../src/flatware";
 import { specObjExample } from "./fromObject.test";
 
-describe( "specFromJSON( jsonObj )", () => {
+describe( "spec.fromJSON( jsonObj )", () => {
 
   it( "if you provide a non-JSON Object, it throws an illegal argument", () => {
   
     [ undefined, null, true, 1, "thingy", {}, [], new Date() ].forEach( arg => {
-      assert.throws( () => { flatware.specFromJSON( arg ) }, /^Illegal argument/ );
+      assert.throws( () => { flatware.spec.fromJSON( arg ) }, /^Illegal argument/ );
     });
   });
 
@@ -19,7 +19,7 @@ describe( "specFromJSON( jsonObj )", () => {
       `{ unquoted: true }`,
       `{ "missingComma": true "realProperty": false }`
     ].forEach( badObj => {
-      assert.throws( () => { flatware.specFromJSON( badObj ); }, /^Illegal argument/ );  
+      assert.throws( () => { flatware.spec.fromJSON( badObj ); }, /^Illegal argument/ );  
     });
   });
 
@@ -29,14 +29,14 @@ describe( "specFromJSON( jsonObj )", () => {
       `{ "napkin": "yellow", "placemat": "provençal", "cutlery": { "sets": 4, "style": "french" } }`,
       `{ "storageAdapter": { "type": "writer", "lowerBound": "a", "upperBound": "Z", "ding!": "return" } }`
     ].forEach( badObj => {
-      assert.throws( () => { flatware.specFromJSON( badObj ); }, /^Illegal argument/ );  
+      assert.throws( () => { flatware.spec.fromJSON( badObj ); }, /^Illegal argument/ );  
     });
   });
 
   it( "if you provide a well-formed JSON object, it returns the corresponding spec", () => {
     
     const jsonObj = JSON.stringify( specObjExample );
-    const spec = flatware.specFromJSON( jsonObj );
+    const spec = flatware.spec.fromJSON( jsonObj );
 
     Object.keys( specObjExample )
       .forEach( settingName => {

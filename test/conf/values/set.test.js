@@ -8,7 +8,7 @@ describe( "conf.values", () => {
   describe( ".set( name, value )", () => {
     
     beforeEach( () => {
-      conf = flatware.newConf();  
+      conf = flatware.conf.new();  
     });
 
     it( "rejects illegal names", () => {

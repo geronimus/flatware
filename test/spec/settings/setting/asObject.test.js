@@ -8,7 +8,7 @@ describe( "spec.settings.setting", () => {
   describe( ".asObject()", () => {
 
     beforeEach( () => {
-      spec = flatware.newSpec();  
+      spec = flatware.spec.new();  
     });
     
     it( "for a newly-initialized setting spec, it returns only the type", () => {

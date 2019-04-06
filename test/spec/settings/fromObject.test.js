@@ -8,7 +8,7 @@ describe( "spec.settings", () => {
   describe( ".fromObject( name, obj )", () => {
   
     beforeEach( () => {
-      spec = flatware.newSpec();  
+      spec = flatware.spec.new();  
     });
 
     it( "does not allow invalid names", () => {

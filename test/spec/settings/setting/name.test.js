@@ -8,7 +8,7 @@ describe( "spec.settings.setting", () => {
   describe( ".name", () => {
 
     beforeEach( () => {
-      spec = flatware.newSpec();
+      spec = flatware.spec.new();
     });
   
     it( "acts like a property", () => {
@@ -27,7 +27,7 @@ describe( "spec.settings.setting", () => {
     let renamedSetting;
 
     beforeEach( () => {
-      spec = flatware.newSpec();
+      spec = flatware.spec.new();
       renamedSetting = spec.settings.define( originalName, "string" );
     });
   

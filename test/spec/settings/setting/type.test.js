@@ -10,7 +10,7 @@ describe( "spec.settings.setting", () => {
   describe( ".type", () => {
   
     beforeEach( () => {
-      spec = flatware.newSpec();
+      spec = flatware.spec.new();
     });
 
     it( "you can get the type, as if it were a property", () => {
@@ -25,7 +25,7 @@ describe( "spec.settings.setting", () => {
   describe( ".redefineType( newType )", () => {
     
     beforeEach( () => {
-      spec = flatware.newSpec();
+      spec = flatware.spec.new();
     });
 
     it( "rejects invalid types", () => {

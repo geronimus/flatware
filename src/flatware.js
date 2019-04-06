@@ -1,15 +1,18 @@
 import { newSpec, specFromJSON, specFromObject } from "./spec";
-import { newConf, confFromJSON, confFromObject, fromTemplate } from "./conf";
+import { newConf, confFromJSON, confFromObject, confFromTemplate } from "./conf";
 
 export default Object.freeze({
-  conf: Object.freeze({
-    fromTemplate  
+  spec: Object.freeze({
+    new: newSpec,
+    fromObject: specFromObject,
+    fromJSON: specFromJSON
   }),
-  newConf,
-  confFromJSON,
-  confFromObject,
-  newSpec,
-  specFromJSON,
-  specFromObject
+
+  conf: Object.freeze({
+    new: newConf,
+    fromObject: confFromObject,
+    fromJSON: confFromJSON,
+    fromTemplate: confFromTemplate
+  }),
 });
 

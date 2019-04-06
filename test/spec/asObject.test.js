@@ -6,7 +6,7 @@ let spec;
 describe( "spec", () => {
 
   beforeEach( () => {
-    spec = flatware.newSpec();  
+    spec = flatware.spec.new();  
   });
 
   describe( ".asObject()", () => {

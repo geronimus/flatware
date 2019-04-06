@@ -7,7 +7,7 @@ describe( "conf.values", () => {
   
   describe( ".remove( name )", () => {
   
-    beforeEach( () => { conf = flatware.newConf(); } );
+    beforeEach( () => { conf = flatware.conf.new(); } );
 
     it( "rejects invalid names", () => {
       

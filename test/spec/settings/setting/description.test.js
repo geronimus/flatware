@@ -9,7 +9,7 @@ describe( "spec.settings.setting", () => {
   describe( ".desc", () => {
     
     beforeEach( () => {
-      spec = flatware.newSpec();  
+      spec = flatware.spec.new();  
       describedSetting = spec.settings.define( "json length", "number" );
     });
 

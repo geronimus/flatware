@@ -8,7 +8,7 @@ describe( "spec", () => {
     
     it( "given an empty spec, you get an empty JSON object string", () => {
     
-      const spec = flatware.newSpec();
+      const spec = flatware.spec.new();
       assert.strictEqual( spec.getTemplate(), "{}" );
     });
 
@@ -16,7 +16,7 @@ describe( "spec", () => {
       "mapped to an object containing the type and desc, " +
       "and a placeholder for the value", () => {
     
-      const spec = flatware.specFromObject( specObjExample );
+      const spec = flatware.spec.fromObject( specObjExample );
       const templateObj = {};
 
       Object.keys( specObjExample ).forEach( key => {

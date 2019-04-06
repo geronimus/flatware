@@ -1,8 +1,8 @@
 import { IllegalArgument } from "@geronimus/utils";
 
-function fromTemplate() {
+function confFromTemplate() {
   IllegalArgument();
 }
 
-export default fromTemplate;
+export default confFromTemplate;
 

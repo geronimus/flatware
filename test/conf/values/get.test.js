@@ -5,7 +5,7 @@ let conf;
 
 describe( "conf.values", () => {
 
-  beforeEach( () => { conf = flatware.newConf(); });
+  beforeEach( () => { conf = flatware.conf.new(); });
 
   describe( ".get( name )", () => {
   

@@ -9,7 +9,7 @@ describe( "spec.settings.setting", () => {
   describe( ".getConstraint( constraint )", () => {
     
     beforeEach( () => {
-      spec = flatware.newSpec();
+      spec = flatware.spec.new();
     });
 
     it( "throws an illegal argument exception when the property argument is invalid", () => {

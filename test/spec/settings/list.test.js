@@ -8,7 +8,7 @@ describe( "spec.settings", () => {
   describe( ".list()", () => {
     
     beforeEach( () => {
-      spec = flatware.newSpec();
+      spec = flatware.spec.new();
     });
 
     it( "returns the empty list, if there are no settings defined", () => {

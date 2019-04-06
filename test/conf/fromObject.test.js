@@ -10,7 +10,7 @@ const exampleConfObj = {
 
 describe( "flatware", () => {
 
-  describe( ".confFromObject( obj )", () => {
+  describe( ".conf.fromObject( obj )", () => {
   
     it( "rejects non-objects", () => {
       
@@ -18,7 +18,7 @@ describe( "flatware", () => {
         undefined, null, true, 1, "thingy", new Date(), []
       ].forEach( badObj => {
         assert.throws(
-          () => { flatware.confFromObject( badObj ); },
+          () => { flatware.conf.fromObject( badObj ); },
           /^Illegal argument/
         );
       });
@@ -32,7 +32,7 @@ describe( "flatware", () => {
         { "embeddedObject": {} }
       ].forEach( badObj => {
         assert.throws(
-          () => { flatware.confFromObject( badObj ); },
+          () => { flatware.conf.fromObject( badObj ); },
           /^Illegal argument/
         );
       });
@@ -40,7 +40,7 @@ describe( "flatware", () => {
 
     it( "can create a conf from an object literal", () => {
     
-      const conf = flatware.confFromObject( exampleConfObj );
+      const conf = flatware.conf.fromObject( exampleConfObj );
 
       Object.keys( exampleConfObj ).forEach( key => {
         if ( exampleConfObj[ key ] instanceof Date )

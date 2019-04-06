@@ -4,7 +4,7 @@ import { exampleConfObj } from "./fromObject.test";
 
 describe( "flatware", () => {
 
-  describe( ".confFromJSON( jsonText )", () => {
+  describe( ".conf.fromJSON( jsonText )", () => {
   
     it( "rejects non-strings", () => {
     
@@ -12,7 +12,7 @@ describe( "flatware", () => {
         undefined, null, true, 1, new Date(), {}, []
       ].forEach( badText => {
         assert.throws(
-          () => { flatware.confFromJSON( badText ); },
+          () => { flatware.conf.fromJSON( badText ); },
           /^Illegal argument/
         );
       });
@@ -26,7 +26,7 @@ describe( "flatware", () => {
         "{ noQuotes: true }",
         `{ "noComma": true "secondProp": false }`
       ].forEach( badJSON => {
-        () => { flatware.confFromJSON( badJSON ); },
+        () => { flatware.conf.fromJSON( badJSON ); },
         /^Illegal argument/
       });
     });
@@ -34,7 +34,7 @@ describe( "flatware", () => {
     it( "given a valid JSON object, it creates a conf", () => {
     
       const jsonText = JSON.stringify( exampleConfObj );
-      const conf = flatware.confFromJSON( jsonText );
+      const conf = flatware.conf.fromJSON( jsonText );
 
       Object.keys( exampleConfObj ).forEach( key => {
         if ( exampleConfObj[ key ] instanceof Date )

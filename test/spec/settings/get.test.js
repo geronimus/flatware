@@ -8,7 +8,7 @@ describe( "spec.settings", () => {
   describe( ".get( settingName )", () => {
   
     beforeEach( () => {
-      spec = flatware.newSpec();  
+      spec = flatware.spec.new();  
     });
 
     it( "throws an illegal argument exception when you provide an invalid settingName", () => {

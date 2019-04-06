@@ -25,11 +25,11 @@ const specObjExample  = {
   }
 }
 
-describe( ".specFromObject( obj )", () => {
+describe( ".spec.fromObject( obj )", () => {
 
   it( "throws an illegal argument for non-object values", () => {
     [ undefined, null, true, 1, "val", [] ].forEach( val => {
-      assert.throws( () => { flatware.specFromObject( val ); }, /^Illegal argument/ );
+      assert.throws( () => { flatware.spec.fromObject( val ); }, /^Illegal argument/ );
     });
   });
 
@@ -41,7 +41,7 @@ describe( ".specFromObject( obj )", () => {
       }
     };
     assert.throws(
-      () => { flatware.specFromObject( reallyNonConformant ); },
+      () => { flatware.spec.fromObject( reallyNonConformant ); },
       /^Illegal argument/
     );
 
@@ -50,7 +50,7 @@ describe( ".specFromObject( obj )", () => {
       "cores": { optionsList: [ 1, 2, 3, 4, 5, 6 ] }
     };
     assert.throws(
-      () => { flatware.specFromObject( minimallyNonConformant ); },
+      () => { flatware.spec.fromObject( minimallyNonConformant ); },
       /^Illegal argument/
     );
   });
@@ -58,7 +58,7 @@ describe( ".specFromObject( obj )", () => {
   it( "returns a complete spec for a conformant object", () => {
 
     const obj = specObjExample;
-    const spec = flatware.specFromObject( obj );
+    const spec = flatware.spec.fromObject( obj );
 
     Object.keys( obj )
       .forEach( settingName => {

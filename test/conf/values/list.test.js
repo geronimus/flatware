@@ -8,7 +8,7 @@ describe( "conf.values", () => {
 
   describe( ".list()", () => {
     
-    beforeEach( () => { conf = flatware.newConf(); } );
+    beforeEach( () => { conf = flatware.conf.new(); } );
 
     it( "if no values are set, it returns an empty map (object)", () => {
       assert.deepEqual( conf.values.list(), {} );
