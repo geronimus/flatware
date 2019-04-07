@@ -7,6 +7,17 @@ function copyValue( ref ) {
     return ref;
 }
 
+function jsonIsValid( jsonText ) {
+  
+  if ( typeof jsonText !== "string" )
+    return false;
+  else {
+    try { JSON.parse( jsonText ); }
+    catch( ignore ) { return false; }
+  }
+  return true;
+}
+
 function reviveJSONDates( key, val ) {
   const isoDatePattern =
     /^([+-]\d{2})?\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d{1,3}Z$/;
@@ -17,5 +28,5 @@ function reviveJSONDates( key, val ) {
     return val;
 }
 
-export { copyValue, reviveJSONDates };
+export { copyValue, jsonIsValid, reviveJSONDates };
 
