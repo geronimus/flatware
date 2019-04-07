@@ -55,6 +55,30 @@ describe( "conf", () => {
       const nothingSet = flatware.conf.fromTemplate( template );
       assert.deepEqual( nothingSet.values.list(), {} );
     });
+
+    it( "creates a complete conf object, given non-null values", () => {
+    
+      const templateObj = JSON.parse(
+        flatware.spec.fromObject( specObject ).getTemplate()
+      );
+
+      templateObj.storageAdaptor.value = "memoryStorage";
+      templateObj.processTarget.value = 6;
+      templateObj.clientOnly.value = true;
+      templateObj.dateMax.value = new Date( "9999-12-31T23:59.59.999Z" );
+      
+      const templateJSON = JSON.stringify( templateObj, null, 2 );
+
+      const conf = flatware.conf.fromTemplate( templateJSON );
+
+      Object.keys( conf.values.list() ).forEach( setting => {
+        assert.strictEqual(
+          conf.values.get( setting ),
+          templateObj[ setting ].value
+        );  
+      });
+
+    });
   });
 });
 
