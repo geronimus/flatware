@@ -1,6 +1,6 @@
 import { assert } from "chai";
 import flatware from "../../../src/flatware";
-import { exampleConfObj } from "../fromObject.test";
+import { confObject } from "../../example/conf";
 
 let conf;
 
@@ -16,7 +16,7 @@ describe( "conf.values", () => {
 
     it( "returns a sorted list of values you have previously set", () => {
     
-      const vals = exampleConfObj;
+      const vals = confObject;
       const sortedKeys = Object.keys( vals ).sort();
 
       Object.keys( vals )

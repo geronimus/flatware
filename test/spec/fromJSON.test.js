@@ -1,6 +1,6 @@
 import { assert } from "chai";
 import flatware from "../../src/flatware";
-import { specObjExample } from "./fromObject.test";
+import { specObject } from "../example/spec";
 
 describe( "spec.fromJSON( jsonObj )", () => {
 
@@ -35,21 +35,21 @@ describe( "spec.fromJSON( jsonObj )", () => {
 
   it( "if you provide a well-formed JSON object, it returns the corresponding spec", () => {
     
-    const jsonObj = JSON.stringify( specObjExample );
+    const jsonObj = JSON.stringify( specObject );
     const spec = flatware.spec.fromJSON( jsonObj );
 
-    Object.keys( specObjExample )
+    Object.keys( specObject )
       .forEach( settingName => {
         let setting = spec.settings.get( settingName );
-        assert.strictEqual( setting.type, specObjExample[ settingName ][ "type" ] );
-        assert.strictEqual( setting.desc, specObjExample[ settingName ][ "desc" ] );
+        assert.strictEqual( setting.type, specObject[ settingName ][ "type" ] );
+        assert.strictEqual( setting.desc, specObject[ settingName ][ "desc" ] );
 
-        Object.keys( specObjExample[ settingName ] )
+        Object.keys( specObject[ settingName ] )
           .filter( key => ![ "type", "desc" ].includes( key ) )
           .forEach( constraintName => {
             assert.deepEqual(
               setting.getConstraint( constraintName ),
-              specObjExample[ settingName ][ constraintName ]
+              specObject[ settingName ][ constraintName ]
             );
           });
       });

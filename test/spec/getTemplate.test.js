@@ -1,6 +1,6 @@
 import { assert } from "chai";
 import flatware from "../../src/flatware";
-import { specObjExample } from "./fromObject.test"
+import { specObject } from "../example/spec";
 
 describe( "spec", () => {
   
@@ -16,11 +16,11 @@ describe( "spec", () => {
       "mapped to an object containing the type and desc, " +
       "and a placeholder for the value", () => {
     
-      const spec = flatware.spec.fromObject( specObjExample );
+      const spec = flatware.spec.fromObject( specObject );
       const templateObj = {};
 
-      Object.keys( specObjExample ).forEach( key => {
-        const itemTemplate = specObjExample[ key ];
+      Object.keys( specObject ).forEach( key => {
+        const itemTemplate = specObject[ key ];
         itemTemplate.value = null;
         templateObj[ key ] = itemTemplate;
       });

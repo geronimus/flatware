@@ -1,12 +1,6 @@
 import { assert } from "chai";
 import flatware from "../../src/flatware";
-
-const exampleConfObj = {
-  storageAdaptor: "rdbmsStorage",
-  hasServer: true,
-  serverNodes: 6,
-  beginningOfTime: new Date( "1970-01-01T00:00:00.0Z" )
-};
+import { confObject } from "../example/conf";
 
 describe( "flatware", () => {
 
@@ -62,20 +56,18 @@ describe( "flatware", () => {
 
     it( "can create a conf from an object literal", () => {
     
-      const conf = flatware.conf.fromObject( exampleConfObj );
+      const conf = flatware.conf.fromObject( confObject );
 
-      Object.keys( exampleConfObj ).forEach( key => {
-        if ( exampleConfObj[ key ] instanceof Date )
+      Object.keys( confObject ).forEach( key => {
+        if ( confObject[ key ] instanceof Date )
           assert.strictEqual(
             conf.values.get( key ).toISOString(),
-            exampleConfObj[ key ].toISOString()
+            confObject[ key ].toISOString()
           );
         else
-          assert.strictEqual( conf.values.get( key ), exampleConfObj[ key ] );  
+          assert.strictEqual( conf.values.get( key ), confObject[ key ] );  
       });
     });
   });
 });
-
-export { exampleConfObj };
 

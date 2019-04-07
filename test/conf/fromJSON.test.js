@@ -1,6 +1,6 @@
 import { assert } from "chai";
 import flatware from "../../src/flatware";
-import { exampleConfObj } from "./fromObject.test";
+import { confObject } from "../example/conf";
 
 describe( "flatware", () => {
 
@@ -33,17 +33,17 @@ describe( "flatware", () => {
 
     it( "given a valid JSON object, it creates a conf", () => {
     
-      const jsonText = JSON.stringify( exampleConfObj );
+      const jsonText = JSON.stringify( confObject );
       const conf = flatware.conf.fromJSON( jsonText );
 
-      Object.keys( exampleConfObj ).forEach( key => {
-        if ( exampleConfObj[ key ] instanceof Date )
+      Object.keys( confObject ).forEach( key => {
+        if ( confObject[ key ] instanceof Date )
           assert.strictEqual(
             conf.values.get( key ).toISOString(),
-            exampleConfObj[ key ].toISOString()
+            confObject[ key ].toISOString()
           );
         else
-          assert.strictEqual( conf.values.get( key ), exampleConfObj[ key ] );
+          assert.strictEqual( conf.values.get( key ), confObject[ key ] );
       });
     });
   });

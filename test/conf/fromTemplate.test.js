@@ -1,6 +1,6 @@
 import { assert } from "chai";
 import flatware from "../../src/flatware";
-import { specObjExample } from "../spec/fromObject.test";
+import { specObject } from "../example/spec";
 
 describe( "conf", () => {
   
@@ -50,7 +50,7 @@ describe( "conf", () => {
 
     it( "converts any values left null to undefined (eg, non-existent) values", () => {
       
-      const template = flatware.spec.fromObject( specObjExample )
+      const template = flatware.spec.fromObject( specObject )
         .getTemplate();
       const nothingSet = flatware.conf.fromTemplate( template );
       assert.deepEqual( nothingSet.values.list(), {} );
