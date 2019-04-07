@@ -1,4 +1,5 @@
 import { IllegalArgument } from "@geronimus/utils";
+import { reviveJSONDates } from "../util/value";
 import specFromObject from "./fromObject";
 
 function specFromJSON( jsonObj ) {
@@ -8,7 +9,7 @@ function specFromJSON( jsonObj ) {
   
   let obj;
 
-  try { obj = JSON.parse( jsonObj, reviveDates ); }
+  try { obj = JSON.parse( jsonObj, reviveJSONDates ); }
   catch( error ) {
     IllegalArgument(
       "jsonObj",
@@ -18,16 +19,6 @@ function specFromJSON( jsonObj ) {
   }
 
   return specFromObject( obj );
-
-  function reviveDates( key, val ) {
-    const isoDatePattern =
-      /^([+-]\d{2})?\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d{1,3}Z$/;
-
-    if ( typeof val === "string" && isoDatePattern.test( val ) )
-      return new Date( val );
-    else
-      return val;
-  }
 }
 
 export default specFromJSON;

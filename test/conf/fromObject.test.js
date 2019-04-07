@@ -27,7 +27,6 @@ describe( "flatware", () => {
     it( "rejects object with illegal values", () => {
       
       [
-        { "undefined": undefined },
         { "array": [] },
         { "embeddedObject": {} }
       ].forEach( badObj => {
@@ -36,6 +35,29 @@ describe( "flatware", () => {
           /^Illegal argument/
         );
       });
+    });
+
+    it( "null values are allowed, but they don't appear as conf values", () => {
+      
+      assert.deepEqual(
+        flatware.conf.fromObject({
+          hasServerInstance: undefined,
+          storageAdaptor: null,
+          processTarget: undefined,
+          dateMax: null
+        }).values.list(),
+        {}
+      );
+      
+      assert.deepEqual(
+        flatware.conf.fromObject({
+          hasServerInstance: true,
+          storageAdaptor: undefined,
+          processTarget: 6,
+          dateMax: null
+        }).values.list(),
+        { hasServerInstance: true, processTarget: 6 }
+      );
     });
 
     it( "can create a conf from an object literal", () => {

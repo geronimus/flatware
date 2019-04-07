@@ -1,5 +1,5 @@
-import { IllegalArgument, IllegalOperation } from "@geronimus/utils";
-import { copyValue } from "../value";
+import { IllegalArgument, IllegalOperation, isNull } from "@geronimus/utils";
+import { copyValue } from "../util/value";
 import { isValidName } from "../spec/setting.js";
 
 function newConf() {
@@ -22,22 +22,24 @@ function newConf() {
     validateName( name );
     validateValue( value );
 
-    if ( value === undefined && Object.keys( vals ).includes( name ) )
+    if ( isNull( value ) && Object.keys( vals ).includes( name ) )
       removeValue( name );
-    else if ( value !== undefined )
+    else if ( !isNull( value ) )
       vals[ name ] = value;
 
     return publicInterface;
 
     function validateValue( value ) {  
       if (
+        !isNull( value ) &&
         !( value instanceof Date ) &&
           ![ "undefined", "boolean", "number", "string" ].includes( typeof value )
       )
         IllegalArgument(
           "value",
           "A value of one of these types:\n- " +
-            `${ [ "undefined", "boolean", "number", "string", "Date" ].join( "\n- " ) }`,
+            `${ [ "undefined", "null", "boolean", "number", "string", "Date" ]
+              .join( "\n- " ) }`,
           value
         );
     }

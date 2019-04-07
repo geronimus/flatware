@@ -1,5 +1,6 @@
 import { assert } from "chai";
 import flatware from "../../src/flatware";
+import { specObjExample } from "../spec/fromObject.test";
 
 describe( "conf", () => {
   
@@ -12,9 +13,47 @@ describe( "conf", () => {
       ].forEach( badTemplate => {
         assert.throws(
           () => { flatware.conf.fromTemplate( badTemplate ); },
-          /^Illegal argument/
+          /^Illegal argument.*A well-formed JSON string/s
         );
       });
+    });
+
+    it( "rejects malformed JSON", () => {
+    
+      [
+        "",
+        "bad JSON",
+        `{ error: "non-quoted name" }`,
+        `{ "error": "no comma" "side of fries?": "no thanks" }`
+      ].forEach( badJSON => {
+        assert.throws(
+          () => { flatware.conf.fromTemplate( badJSON ); },
+          /^Illegal argument.*A well-formed JSON string/s
+        );  
+      });
+    });
+
+    it( "rejects well-formed JSON that does not have the form of a spec template", () => {
+    
+      [
+        `{ "any ol' object": true }`,
+        `{ "almost there": { "value": "missing a type" } }`,
+        `{ "no cigar": { "type": "missing a value - and invalid type" } }`,
+        `{ "works except for invalid type": { "type": "tinyint", "value": 1 } }`
+      ].forEach( badTemplate => {
+        assert.throws(
+          () => { flatware.conf.fromTemplate( badTemplate ); },
+          /^Illegal argument/
+        );  
+      });
+    });
+
+    it( "converts any values left null to undefined (eg, non-existent) values", () => {
+      
+      const template = flatware.spec.fromObject( specObjExample )
+        .getTemplate();
+      const nothingSet = flatware.conf.fromTemplate( template );
+      assert.deepEqual( nothingSet.values.list(), {} );
     });
   });
 });

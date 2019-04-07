@@ -48,7 +48,8 @@ function confFromObject( obj ) {
 
     function findIllegalValues( obj ) {
       return Object.keys( obj ).filter( key => {
-        return !( obj[ key ] instanceof Date ) &&
+        return !isNull( obj[ key ] ) &&
+          !( obj[ key ] instanceof Date ) &&
           ![ "boolean", "number", "string" ].includes( typeof obj[ key ] );
       });
     }

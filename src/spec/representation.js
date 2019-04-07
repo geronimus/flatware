@@ -1,4 +1,4 @@
-import { copyValue } from "../value";
+import { copyValue } from "../util/value";
 import { propertiesByType, constraintsByType } from "./structure";
 
 function objectify( defs ) {

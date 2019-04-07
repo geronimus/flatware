@@ -1,5 +1,6 @@
 import { IllegalArgument } from "@geronimus/utils";
-import confFromObject from "../conf/fromObject";
+import { reviveJSONDates } from "../util/value";
+import confFromObject from "./fromObject";
 
 function confFromJSON( jsonText ) {
 
@@ -8,7 +9,7 @@ function confFromJSON( jsonText ) {
 
   let obj;
 
-  try { obj = JSON.parse( jsonText ); }
+  try { obj = JSON.parse( jsonText, reviveJSONDates ); }
   catch( error ) {
     IllegalArgument(
       "jsonText",
@@ -17,22 +18,7 @@ function confFromJSON( jsonText ) {
     );
   }
 
-  return confFromObject( rehydrateDates( obj ) );
-
-  function rehydrateDates( obj ) {
-
-    const isoDatePattern = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/;
-
-    Object.keys( obj ).forEach( key => {
-      if (
-        typeof obj[ key ] === "string" &&
-          isoDatePattern.test( obj[ key ] )
-      )
-        obj[ key ] = new Date( obj[ key ] );
-    });
-
-    return obj;
-  }
+  return confFromObject( obj );
 }
 
 export default confFromJSON;
