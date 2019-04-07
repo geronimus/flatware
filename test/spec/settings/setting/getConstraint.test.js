@@ -1,6 +1,6 @@
 import { assert } from "chai";
 import flatware from "../../../../src/flatware";
-import { allowedConstraints } from "../../../../src/spec/setting";
+import { constraintsByType as allowedConstraints } from "../../../../src/spec/structure";
 
 let spec;
 

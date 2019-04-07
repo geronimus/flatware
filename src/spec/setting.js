@@ -249,8 +249,6 @@ const setting = Object.freeze({
 export default setting;
 
 export {
-  allowedConstraints,
-  allowedTypes,
   isValidName,
   setting
 };

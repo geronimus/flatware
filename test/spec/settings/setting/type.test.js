@@ -1,6 +1,6 @@
 import { assert } from "chai";
 import flatware from "../../../../src/flatware";
-import { allowedTypes } from "../../../../src/spec/setting";
+import { types as allowedTypes } from "../../../../src/spec/structure";
 
 let spec;
 let typeSetting;
