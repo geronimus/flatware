@@ -1,8 +1,8 @@
 const confObject = {
-  storageAdaptor: "rdbmsStorage",
-  hasServer: true,
-  serverNodes: 6,
-  beginningOfTime: new Date( "1970-01-01T00:00:00.0Z" )
+  storageAdaptor: "memoryStorage",
+  processTarget: 6,
+  clientOnly: true,
+  dateMax: new Date( "9999-12-31T23:59:59.999Z" )
 };
 
 export { confObject };

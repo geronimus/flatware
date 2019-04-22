@@ -1,5 +1,6 @@
-import { constraintsByType, types } from "./structure";
 import { IllegalArgument, IllegalOperation, isNull } from "@geronimus/utils";
+import { constraintsByType, types } from "./structure";
+import { copyValue } from "../util/value";
 
 const allowedConstraints = constraintsByType;
 const allowedTypes = types;
@@ -24,18 +25,13 @@ function create( name, type, sendToParent ) {
     },
     getConstraint,
     setConstraint,
+    listConstraints,
     rename,
     redefineType,
     asObject
   });
 
   return publicInterface;
-
-  function getConstraint( constraint ) {
-    
-    validateConstraintName( constraint, myType );
-    return constraints[ constraint ];
-  }
 
   function setConstraint( constraint, value ) {
     
@@ -45,6 +41,25 @@ function create( name, type, sendToParent ) {
     constraints[ constraint ] = value;
 
     return publicInterface;
+  }
+
+  function getConstraint( constraint ) {
+    
+    validateConstraintName( constraint, myType );
+    return constraints[ constraint ];
+  }
+
+  function listConstraints() {
+    
+    return Object.keys( constraints )
+      .filter( name => constraints[ name ] !== undefined )
+      .reduce(
+        ( obj, name ) => {
+          obj[ name ] = copyValue( constraints[ name ] );
+          return obj;
+        },
+        {}
+      );
   }
 
   function rename( newName ) {

@@ -7,6 +7,6 @@ export {
   newConf,
   confFromObject,
   confFromJSON,
-  confFromTemplate
+  confFromTemplate,
 };
 

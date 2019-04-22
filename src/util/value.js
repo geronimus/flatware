@@ -1,3 +1,19 @@
+function compareValue( val, other ) {
+  if ( val instanceof Date && other instanceof Date )
+    return JSON.stringify( val ) === JSON.stringify( other );
+  else if (
+    ( Array.isArray( val ) && Array.isArray( other ) ) ||
+      ( typeof val === "object" && typeof other === "object" )
+  )
+    return Object.keys( val ).length === Object.keys( other ).length &&
+      Object.keys( val )
+        .every( item => Object.keys( other ).includes( item ) ) &&
+      Object.keys( val )
+        .every( item => compareValue( val[ item ], other[ item ] ) );
+  else
+    return val === other;
+}
+
 function copyValue( ref ) {
   if ( Array.isArray( ref ) )
     return ref.map( copyValue );
@@ -28,5 +44,5 @@ function reviveJSONDates( key, val ) {
     return val;
 }
 
-export { copyValue, jsonIsValid, reviveJSONDates };
+export { compareValue, copyValue, jsonIsValid, reviveJSONDates };
 
