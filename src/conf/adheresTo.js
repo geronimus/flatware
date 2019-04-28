@@ -1,6 +1,4 @@
 import confConformsWith from "./conformsWith";
-import { confReport } from "./report";
-import { validateSpec } from "../spec/validate";
 
 function confAdheresTo( spec, conf ) {
   
