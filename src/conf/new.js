@@ -1,5 +1,6 @@
 import { IllegalArgument, IllegalOperation, isNull } from "@geronimus/utils";
 import confAdheresTo from "./adheresTo";
+import confConformsWith from "./conformsWith";
 import { copyValue } from "../util/value";
 import { isValidName } from "../spec/setting.js";
 
@@ -8,7 +9,12 @@ function newConf() {
   const vals = {};
 
   const publicInterface = Object.freeze({
-    adheresTo: ( spec ) => { return confAdheresTo( spec, publicInterface ); },
+    adheresTo: ( spec ) => {
+      return confAdheresTo( spec, publicInterface );
+    },
+    conformsWith: ( spec ) => {
+      return confConformsWith( spec, publicInterface );
+    },
 
     values: Object.freeze({
       set: defineValue,
