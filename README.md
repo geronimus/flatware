@@ -8,88 +8,13 @@ ___flatware___ defines two kinds of objects - a ___spec___ (specification), and 
 
 ## Contents
 [spec](#spec)
-
 [conf](#conf)
-
 [Value Types](#value-types)
-
 [Constraints](#constraints)
-
 [Define a spec](#define-a-spec)
-
 [Templates](#Templates)
-
 [Configurations](#Configurations)
-
-[Validation] (#Validation)
-
-[conf.adheresTo( spec )](#confadheresTo-spec-)
-
-[conf.conformsWith( spec )](#confconformsWith-spec-)
-
-[API](#API)
-
-[flatware](#flatware)
-
-[flatware.conf](#flatwareconf)
-
-[flatware.conf.new](#flatwareconfnew--conf)
-
-[flatware.conf.fromJSON](#flatwareconffromObject-obj--Object---conf)
-
-[flatware.conf.fromJSON](#flatwareconffromJSON-jsonText--JSONString---conf)
-
-[flatware.conf.fromTemplate](#flatwareconffromTemplate-template--JSONString---conf)
-
-[flatware.parseTemplate](#flatwareparseTemplate-template--JSONString---object)
-
-[flatware.spec.fromObject](#flatwarespecfromObject-obj--object---conf)
-
-[flatware.spec.fromJSON](#flatwarespecfromJSON-jsonText--JSONString---conf)
-
-[flatware.spec.fromTemplate](#flatwarespecfromTemplate-template--JSONString---spec)
-
-[conf.adheresTo](#confadheresTo-spec--spec---confReport)
-
-[conf.conformsWith](#confconformsWith-spec--spec---conf)
-
-[conf.values.get](#confvaluesget-name--string---any)
-
-[conf.values.list](#confvalueslist---object)
-
-[conf.values.remove](#confvaluesremove-name--string---void)
-
-[conf.values.set](#confvaluesset-name--string-value--boolean-number-string-Date---void)
-
-[spec.asObject](#specasObject---specObject)
-
-[spec.getTemplate](#specgetTemplate---string)
-
-[spec.settings.define](#specsettingsdefine-name--string-type--string---setting)
-
-[spec.settings.fromObject](#specsettingsfromObject-name--string-obj--object---setting)
-
-[spec.settings.get](#specsettingsget-settingName--string---setting)
-
-[spec.settings.list](#specsettingslist---Array-string-)
-
-[spec.settings.remove](#specsettingsremove-settingName--string---void)
-
-[setting.asObject](#settingasObject--object)
-
-[setting.desc](#settingdesc)
-
-[setting.getConstraint](#settinggetConstraint-constraint--string---constraint)
-
-[setting.listConstraints](#settinglistConstraints--object)
-
-[setting.name](#settingname)
-
-[setting.redefineType](#settingredefineType-newType--string---setting)
-
-[setting.rename](#settingrename-newName--string---setting)
-
-[setting.type](#settingtype)
+[Validation](#Validation)
 
 ## spec
 #### Specification
@@ -281,6 +206,38 @@ ___conformsWith___ requires the ___conf___ to not contradict the ___spec___'s de
 ## API
 
 There is also a full, programmatic application programming interface for defining specs and confs. We present it below.
+
+[flatware](#flatware)
+[flatware.conf](#flatwareconf)
+[flatware.conf.new](#flatwareconfnew--conf)
+[flatware.conf.fromJSON](#flatwareconffromObject-obj--Object---conf)
+[flatware.conf.fromJSON](#flatwareconffromJSON-jsonText--JSONString---conf)
+[flatware.conf.fromTemplate](#flatwareconffromTemplate-template--JSONString---conf)
+[flatware.parseTemplate](#flatwareparseTemplate-template--JSONString---object)
+[flatware.spec.fromObject](#flatwarespecfromObject-obj--object---conf)
+[flatware.spec.fromJSON](#flatwarespecfromJSON-jsonText--JSONString---conf)
+[flatware.spec.fromTemplate](#flatwarespecfromTemplate-template--JSONString---spec)
+[conf.adheresTo](#confadheresTo-spec--spec---confReport)
+[conf.conformsWith](#confconformsWith-spec--spec---conf)
+[conf.values.get](#confvaluesget-name--string---any)
+[conf.values.list](#confvalueslist---object)
+[conf.values.remove](#confvaluesremove-name--string---void)
+[conf.values.set](#confvaluesset-name--string-value--boolean-number-string-Date---void)
+[spec.asObject](#specasObject---specObject)
+[spec.getTemplate](#specgetTemplate---string)
+[spec.settings.define](#specsettingsdefine-name--string-type--string---setting)
+[spec.settings.fromObject](#specsettingsfromObject-name--string-obj--object---setting)
+[spec.settings.get](#specsettingsget-settingName--string---setting)
+[spec.settings.list](#specsettingslist---Array-string-)
+[spec.settings.remove](#specsettingsremove-settingName--string---void)
+[setting.asObject](#settingasObject--object)
+[setting.desc](#settingdesc)
+[setting.getConstraint](#settinggetConstraint-constraint--string---constraint)
+[setting.listConstraints](#settinglistConstraints--object)
+[setting.name](#settingname)
+[setting.redefineType](#settingredefineType-newType--string---setting)
+[setting.rename](#settingrename-newName--string---setting)
+[setting.type](#settingtype)
 
 ### flatware
 
