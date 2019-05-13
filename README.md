@@ -8,46 +8,87 @@ ___flatware___ defines two kinds of objects - a ___spec___ (specification), and 
 
 ## Contents
 [spec](#spec)
+
 [conf](#conf)
+
 [Value Types](#Value Types)
+
 [Constraints](#Constraints)
+
 [Define a spec](#Define a spec)
+
 [Templates](#Templates)
+
 [Configurations](#Configurations)
+
 [Validation] (#Validation)
+
 [conf.adheresTo( spec )](#conf.adheresTo( spec ))
+
 [conf.conformsWith( spec )](#conf.conformsWith( spec ))
+
 [API](#API)
+
 [flatware](#flatware)
+
 [flatware.conf](#flatware.conf)
+
 [flatware.conf.new](#flatware.conf.new() : conf)
+
 [flatware.conf.fromJSON](#flatware.conf.fromObject( obj : Object ) : conf)
+
 [flatware.conf.fromJSON](#flatware.conf.fromJSON( jsonText : JSONString ) : conf)
+
 [flatware.conf.fromTemplate](#flatware.conf.fromTemplate( template : JSONString ) : conf)
+
 [flatware.parseTemplate](#flatware.parseTemplate( template : JSONString ) : object)
+
 [flatware.spec.fromObject](#flatware.spec.fromObject( obj : object ) : conf)
+
 [flatware.spec.fromJSON](#flatware.spec.fromJSON( jsonText : JSONString ) : conf)
+
 [flatware.spec.fromTemplate](#flatware.spec.fromTemplate( template : JSONString ) : spec)
+
 [conf.adheresTo](#conf.adheresTo( spec : spec ) : confReport)
+
 [conf.conformsWith](#conf.conformsWith( spec : spec ) : conf)
+
 [conf.values.get](#conf.values.get( name : string ) : any)
+
 [conf.values.list](#conf.values.list() : object)
+
 [conf.values.remove](#conf.values.remove( name : string ) : void)
+
 [conf.values.set](#conf.values.set( name : string, value : boolean | number | string | Date ) : void)
+
 [spec.asObject](#spec.asObject() : specObject)
+
 [spec.getTemplate](#spec.getTemplate() : string)
+
 [spec.settings.define](#spec.settings.define( name : string, type : string ) : setting)
+
 [spec.settings.fromObject](#spec.settings.fromObject( name : string, obj : object ) : setting)
+
 [spec.settings.get](#spec.settings.get( settingName : string ) : setting)
+
 [spec.settings.list](#spec.settings.list() : Array[ string ])
+
 [spec.settings.remove](#spec.settings.remove( settingName : string ) : void)
+
 [setting.asObject](#setting.asObject() : object)
+
 [setting.desc](#setting.desc)
+
 [setting.getConstraint](#setting.getConstraint( constraint : string ) : constraint)
+
 [setting.listConstraints](#setting.listConstraints() : object)
+
 [setting.name](#setting.name)
+
 [setting.redefineType](#setting.redefineType( newType : string ) : setting)
+
 [setting.rename](#setting.rename( newName : string ) : setting)
+
 [setting.type](#setting.type)
 
 ## spec
