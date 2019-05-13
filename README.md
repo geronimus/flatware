@@ -11,11 +11,11 @@ ___flatware___ defines two kinds of objects - a ___spec___ (specification), and 
 
 [conf](#conf)
 
-[Value Types](#Value Types)
+[Value Types](#value-types)
 
-[Constraints](#Constraints)
+[Constraints](#constraints)
 
-[Define a spec](#Define a spec)
+[Define a spec](#define-a-spec)
 
 [Templates](#Templates)
 
@@ -23,73 +23,73 @@ ___flatware___ defines two kinds of objects - a ___spec___ (specification), and 
 
 [Validation] (#Validation)
 
-[conf.adheresTo( spec )](#conf.adheresTo( spec ))
+[conf.adheresTo( spec )](#confadheresTo-spec-)
 
-[conf.conformsWith( spec )](#conf.conformsWith( spec ))
+[conf.conformsWith( spec )](#confconformsWith-spec-)
 
 [API](#API)
 
 [flatware](#flatware)
 
-[flatware.conf](#flatware.conf)
+[flatware.conf](#flatwareconf)
 
-[flatware.conf.new](#flatware.conf.new() : conf)
+[flatware.conf.new](#flatwareconfnew--conf)
 
-[flatware.conf.fromJSON](#flatware.conf.fromObject( obj : Object ) : conf)
+[flatware.conf.fromJSON](#flatwareconffromObject-obj--Object---conf)
 
-[flatware.conf.fromJSON](#flatware.conf.fromJSON( jsonText : JSONString ) : conf)
+[flatware.conf.fromJSON](#flatwareconffromJSON-jsonText--JSONString---conf)
 
-[flatware.conf.fromTemplate](#flatware.conf.fromTemplate( template : JSONString ) : conf)
+[flatware.conf.fromTemplate](#flatwareconffromTemplate-template--JSONString---conf)
 
-[flatware.parseTemplate](#flatware.parseTemplate( template : JSONString ) : object)
+[flatware.parseTemplate](#flatwareparseTemplate-template--JSONString---object)
 
-[flatware.spec.fromObject](#flatware.spec.fromObject( obj : object ) : conf)
+[flatware.spec.fromObject](#flatwarespecfromObject-obj--object---conf)
 
-[flatware.spec.fromJSON](#flatware.spec.fromJSON( jsonText : JSONString ) : conf)
+[flatware.spec.fromJSON](#flatwarespecfromJSON-jsonText--JSONString---conf)
 
-[flatware.spec.fromTemplate](#flatware.spec.fromTemplate( template : JSONString ) : spec)
+[flatware.spec.fromTemplate](#flatwarespecfromTemplate-template--JSONString---spec)
 
-[conf.adheresTo](#conf.adheresTo( spec : spec ) : confReport)
+[conf.adheresTo](#confadheresTo-spec--spec---confReport)
 
-[conf.conformsWith](#conf.conformsWith( spec : spec ) : conf)
+[conf.conformsWith](#confconformsWith-spec--spec---conf)
 
-[conf.values.get](#conf.values.get( name : string ) : any)
+[conf.values.get](#confvaluesget-name--string---any)
 
-[conf.values.list](#conf.values.list() : object)
+[conf.values.list](#confvalueslist---object)
 
-[conf.values.remove](#conf.values.remove( name : string ) : void)
+[conf.values.remove](#confvaluesremove-name--string---void)
 
-[conf.values.set](#conf.values.set( name : string, value : boolean | number | string | Date ) : void)
+[conf.values.set](#confvaluesset-name--string-value--boolean-number-string-Date---void)
 
-[spec.asObject](#spec.asObject() : specObject)
+[spec.asObject](#specasObject---specObject)
 
-[spec.getTemplate](#spec.getTemplate() : string)
+[spec.getTemplate](#specgetTemplate---string)
 
-[spec.settings.define](#spec.settings.define( name : string, type : string ) : setting)
+[spec.settings.define](#specsettingsdefine-name--string-type--string---setting)
 
-[spec.settings.fromObject](#spec.settings.fromObject( name : string, obj : object ) : setting)
+[spec.settings.fromObject](#specsettingsfromObject-name--string-obj--object---setting)
 
-[spec.settings.get](#spec.settings.get( settingName : string ) : setting)
+[spec.settings.get](#specsettingsget-settingName--string---setting)
 
-[spec.settings.list](#spec.settings.list() : Array[ string ])
+[spec.settings.list](#specsettingslist---Array-string-)
 
-[spec.settings.remove](#spec.settings.remove( settingName : string ) : void)
+[spec.settings.remove](#specsettingsremove-settingName--string---void)
 
-[setting.asObject](#setting.asObject() : object)
+[setting.asObject](#settingasObject--object)
 
-[setting.desc](#setting.desc)
+[setting.desc](#settingdesc)
 
-[setting.getConstraint](#setting.getConstraint( constraint : string ) : constraint)
+[setting.getConstraint](#settinggetConstraint-constraint--string---constraint)
 
-[setting.listConstraints](#setting.listConstraints() : object)
+[setting.listConstraints](#settinglistConstraints--object)
 
-[setting.name](#setting.name)
+[setting.name](#settingname)
 
-[setting.redefineType](#setting.redefineType( newType : string ) : setting)
+[setting.redefineType](#settingredefineType-newType--string---setting)
 
-[setting.rename](#setting.rename( newName : string ) : setting)
+[setting.rename](#settingrename-newName--string---setting)
 
-[setting.type](#setting.type)
+[setting.type](#settingtype)
 
 ## spec
 #### Specification
