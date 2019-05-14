@@ -1,12 +1,5 @@
-# Flatware
-
-(As in place settings.) This is a simple library to help you place settings. (eg, Configurations.)
-
-We're trying to keep things simple. Therefore we're sticking with the idea of a one-level (flat) list of values, each of which has a unique name.
-
-___flatware___ defines two kinds of objects - a ___spec___ (specification), and a ___conf___ (configuration).
-
 ## Contents
+- [Flatware](#flatware)
 - [spec](#spec)
 - [conf](#conf)
 - [Value Types](#value-types)
@@ -16,6 +9,14 @@ ___flatware___ defines two kinds of objects - a ___spec___ (specification), and 
 - [Configurations](#Configurations)
 - [Validation](#Validation)
 - [API](#api)
+
+# Flatware
+
+(As in place settings.) This is a simple library to help you place settings. (eg, Configurations.)
+
+We're trying to keep things simple. Therefore we're sticking with the idea of a one-level (flat) list of values, each of which has a unique name.
+
+___flatware___ defines two kinds of objects - a ___spec___ (specification), and a ___conf___ (configuration).
 
 ## spec
 #### Specification
