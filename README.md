@@ -15,6 +15,7 @@ ___flatware___ defines two kinds of objects - a ___spec___ (specification), and 
 - [Templates](#Templates)
 - [Configurations](#Configurations)
 - [Validation](#Validation)
+- [API](#api)
 
 ## spec
 #### Specification
