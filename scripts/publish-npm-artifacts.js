@@ -48,7 +48,7 @@ function reportResult( op, source, destination, err ) {
 function publishPackage( publishedPackageObj ) {
   fs.writeFile(
     publishedPackage,
-    JSON.stringify( publishedPackageObj ),
+    publishedPackageObj,
     ( err ) => {
       reportResult( "publish", "package.json", publishedPackage, err );
     }
@@ -56,7 +56,7 @@ function publishPackage( publishedPackageObj ) {
 }
 
 function makePublishedPackage( srcObj ) {
-  return publishedPacakageObj = Object.keys( srcObj )
+  const publishedPackageObj = Object.keys( srcObj )
     .filter( prop => prop !== "devDependencies" && prop !== "scripts" )
     .reduce(
       ( publicationObj, key ) => {
@@ -65,5 +65,8 @@ function makePublishedPackage( srcObj ) {
       },
       {}
     );
+
+  publishedPackageObj.main = "./flatware.js";
+  return publishedPackageObj;
 }
 
