@@ -9,7 +9,7 @@
     "compile": "webpack",
     "lint": "esw src",
     "lint:watch": "npm run lint -- --watch",
-    "publish-npm-artifacts": "node scripts/build/publish-npm-artifacts.js",
+    "publish-npm-artifacts": "node scripts/publish-npm-artifacts.js",
     "test": "mocha --require @babel/register --recursive",
     "test:watch": "npm run test -- --watch",
     "~test": "npm-run-all --parallel test:watch lint:watch"
