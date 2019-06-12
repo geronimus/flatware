@@ -4,9 +4,12 @@
   "description": "A library to help you define configuration settings in JavaScript",
   "main": "./src/flatware.js",
   "scripts": {
+    "build": "npm-run-all --sequential clean compile publish-npm-artifacts",
     "clean": "rimraf dist/*",
+    "compile": "webpack",
     "lint": "esw src",
     "lint:watch": "npm run lint -- --watch",
+    "publish-npm-artifacts": "node scripts/build/publish-npm-artifacts.js",
     "test": "mocha --require @babel/register --recursive",
     "test:watch": "npm run test -- --watch",
     "~test": "npm-run-all --parallel test:watch lint:watch"
